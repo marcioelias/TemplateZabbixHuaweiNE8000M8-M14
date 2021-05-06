@@ -1,0 +1,1124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>4.4</version>
+    <date>2021-05-06T20:29:14Z</date>
+    <groups>
+        <group>
+            <name>Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template Huawei NE8000 M8-M14</template>
+            <name>Template Huawei NE8000 M8-M14</name>
+            <description>Template Huawei NE8000 M8-M14</description>
+            <templates>
+                <template>
+                    <name>Template SNMP Generic</name>
+                </template>
+            </templates>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>BNG</name>
+                </application>
+                <application>
+                    <name>Chassis</name>
+                </application>
+                <application>
+                    <name>Interfaces</name>
+                </application>
+                <application>
+                    <name>IP-Pool</name>
+                </application>
+                <application>
+                    <name>IP-Pool-Group</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Total Dual-Stack Online Num</name>
+                    <type>SNMPV2</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>HUAWEI-AAA-MIB::hwTotalDualStackOnlineNum.0</snmp_oid>
+                    <key>hwTotalDualStackOnlineNum</key>
+                    <history>7d</history>
+                    <trends>3650d</trends>
+                    <units>!con</units>
+                    <description>Número total de conexões PPPoE online (IPv6)</description>
+                    <applications>
+                        <application>
+                            <name>BNG</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Total IPv6 Online Num</name>
+                    <type>SNMPV2</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>HUAWEI-AAA-MIB::hwTotalIPv6OnlineNum.0</snmp_oid>
+                    <key>hwTotalIPv6OnlineNum</key>
+                    <history>7d</history>
+                    <trends>3650d</trends>
+                    <units>!con</units>
+                    <description>Número total de conexões PPPoE online (IPv6)</description>
+                    <applications>
+                        <application>
+                            <name>BNG</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Total PPPoE Online Num</name>
+                    <type>SNMPV2</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>HUAWEI-AAA-MIB::hwTotalPPPoeOnlineNum.0</snmp_oid>
+                    <key>hwTotalPPPoeOnlineNum</key>
+                    <history>7d</history>
+                    <trends>3650d</trends>
+                    <units>!con</units>
+                    <description>Número total de conexões PPPoE online</description>
+                    <applications>
+                        <application>
+                            <name>BNG</name>
+                        </application>
+                    </applications>
+                </item>
+            </items>
+            <discovery_rules>
+                <discovery_rule>
+                    <name>PPPoE Access-User Interface Discovery</name>
+                    <type>SNMPV2</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>discovery[{#VLANACCESSIFINDEX},HUAWEI-BRAS-SRVCFG-INTERFACE-MIB::hwBRASIfVlanAccessIfIndex,{#VLANACCESSQINQVLANID},HUAWEI-BRAS-SRVCFG-INTERFACE-MIB::hwBRASIfVlanAccessQinqVlanId,{#VLANACCESSVLANID},HUAWEI-BRAS-SRVCFG-INTERFACE-MIB::hwBRASIfVlanAccessVlanId]</snmp_oid>
+                    <key>hwBRASIfVlan</key>
+                    <delay>1h</delay>
+                    <lifetime>7d</lifetime>
+                    <description>Descoberta de Interfaces PPPoE</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>PPPoE Access-User Inferface {#VLANACCESSQINQVLANID}.{#VLANACCESSVLANID}</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-BRAS-SRVCFG-INTERFACE-MIB::hwBRASIfVlanAccessUserNumber.{#VLANACCESSIFINDEX}.{#VLANACCESSQINQVLANID}.{#VLANACCESSVLANID}</snmp_oid>
+                            <key>hwBRASIfVlanAccessUserNumber.[{#VLANACCESSIFINDEX}.{#VLANACCESSQINQVLANID}.{#VLANACCESSVLANID}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <units>!con</units>
+                            <description>PPPoE Connections on Interface</description>
+                            <applications>
+                                <application>
+                                    <name>BNG</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                    </item_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>PPPoE Connections Interface {#VLANACCESSQINQVLANID}.{#VLANACCESSVLANID}</name>
+                            <graph_items>
+                                <graph_item>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>199C0D</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwBRASIfVlanAccessUserNumber.[{#VLANACCESSIFINDEX}.{#VLANACCESSQINQVLANID}.{#VLANACCESSVLANID}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>IP-Pool-Group Discovery</name>
+                    <type>SNMPV2</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>discovery[{#IPPOOLGROUPNAME},HUAWEI-IPPOOL-MIB::hwIPPoolGroupName]</snmp_oid>
+                    <key>hwIPPoolGroupName</key>
+                    <delay>1h</delay>
+                    <lifetime>7d</lifetime>
+                    <description>Descoberta de IP Pool-Groups</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>IP-Pool-Group {#IPPOOLGROUPNAME} Total IP Conflited</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-IPPOOL-MIB::hwIPPoolGroupIPConflictedNum.{#SNMPINDEX}</snmp_oid>
+                            <key>hwIPPoolGroupIPConflictedNum.[{#SNMPINDEX}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <units>!ips</units>
+                            <applications>
+                                <application>
+                                    <name>IP-Pool-Group</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IP-Pool-Group {#IPPOOLGROUPNAME} Total IP Free</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-IPPOOL-MIB::hwIPPoolGroupIPFreeNum.{#SNMPINDEX}</snmp_oid>
+                            <key>hwIPPoolGroupIPFreeNum.[{#SNMPINDEX}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <units>!ips</units>
+                            <applications>
+                                <application>
+                                    <name>IP-Pool-Group</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{$IP_POOL_GROUP_TRIGGER_USAGE}=1 and&#13;
+{avg(5m)}=0</expression>
+                                    <name>Endereços IPv4 ESGOTADOS em {#IPPOOLGROUPNAME}</name>
+                                    <priority>DISASTER</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IP-Pool-Group {#IPPOOLGROUPNAME} Total IP Num</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-IPPOOL-MIB::hwIPPoolGroupIPTotalNum.{#SNMPINDEX}</snmp_oid>
+                            <key>hwIPPoolGroupIPTotalNum.[{#SNMPINDEX}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <units>!ips</units>
+                            <applications>
+                                <application>
+                                    <name>IP-Pool-Group</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IP-Pool-Group {#IPPOOLGROUPNAME} Total IP Used</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-IPPOOL-MIB::hwIPPoolGroupIPUsedNum.{#SNMPINDEX}</snmp_oid>
+                            <key>hwIPPoolGroupIPUsedNum.[{#SNMPINDEX}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <units>!ips</units>
+                            <applications>
+                                <application>
+                                    <name>IP-Pool-Group</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IP-Pool-Group {#IPPOOLGROUPNAME} Percent Usage</name>
+                            <type>CALCULATED</type>
+                            <key>hwIPPoolGroupIPUsedPercent.[{#SNMPINDEX}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>%</units>
+                            <params>(100*last(&quot;hwIPPoolGroupIPUsedNum.[{#SNMPINDEX}]&quot;,0))/last(&quot;hwIPPoolGroupIPTotalNum.[{#SNMPINDEX}]&quot;, 0)</params>
+                            <applications>
+                                <application>
+                                    <name>IP-Pool-Group</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return Math.round(value* 100) / 100</params>
+                                </step>
+                            </preprocessing>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{$IP_POOL_GROUP_TRIGGER_USAGE}=1 and&#13;
+{avg(5m)}&gt;={$IP_POOL_USAGE_THRESHOLD}</expression>
+                                    <name>Uso de Endereços IPv4 em {#IPPOOLGROUPNAME} está acima de {$IP_POOL_USAGE_THRESHOLD}%</name>
+                                    <priority>HIGH</priority>
+                                    <dependencies>
+                                        <dependency>
+                                            <name>Endereços IPv4 ESGOTADOS em {#IPPOOLGROUPNAME}</name>
+                                            <expression>{$IP_POOL_GROUP_TRIGGER_USAGE}=1 and&#13;
+{Template Huawei NE8000 M8-M14:hwIPPoolGroupIPFreeNum.[{#SNMPINDEX}].avg(5m)}=0</expression>
+                                        </dependency>
+                                    </dependencies>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>IP-Pool-Group {#IPPOOLGROUPNAME} Usage Statistics</name>
+                            <graph_items>
+                                <graph_item>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>199C0D</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwIPPoolGroupIPTotalNum.[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>0040FF</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwIPPoolGroupIPUsedNum.[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>FFFF00</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwIPPoolGroupIPFreeNum.[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>3</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>000000</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwIPPoolGroupIPUsedPercent.[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>4</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>F63100</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwIPPoolGroupIPConflictedNum.[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>IP-Pool Discovery</name>
+                    <type>SNMPV2</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>discovery[{#IPPOOLNAME},HUAWEI-IPPOOL-MIB::hwIPPoolName]</snmp_oid>
+                    <key>hwIPPoolName</key>
+                    <delay>1h</delay>
+                    <lifetime>7d</lifetime>
+                    <description>Descoberta de IP Pools</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>IP-Pool {#IPPOOLNAME} Total IP Conflict</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-IPPOOL-MIB::hwIPPoolIPConflictNum.{#SNMPINDEX}</snmp_oid>
+                            <key>hwIPPoolIPConflictNum.[{#SNMPINDEX}]</key>
+                            <history>1d</history>
+                            <trends>3650d</trends>
+                            <units>!ips</units>
+                            <applications>
+                                <application>
+                                    <name>IP-Pool</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IP-Pool {#IPPOOLNAME} Total IP Idle</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-IPPOOL-MIB::hwIPPoolIPIdleNum.{#SNMPINDEX}</snmp_oid>
+                            <key>hwIPPoolIPIdleNum.[{#SNMPINDEX}]</key>
+                            <history>1d</history>
+                            <trends>3650d</trends>
+                            <units>!ips</units>
+                            <applications>
+                                <application>
+                                    <name>IP-Pool</name>
+                                </application>
+                            </applications>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{$IP_POOL_TRIGGER_USAGE}=1 and&#13;
+{avg(5m)}=0</expression>
+                                    <name>Endereços IPv4 ESGOTADOS em {#IPPOOLNAME}</name>
+                                    <priority>DISASTER</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IP-Pool {#IPPOOLNAME} Total IP Num</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-IPPOOL-MIB::hwIPPoolIPTotalNum.{#SNMPINDEX}</snmp_oid>
+                            <key>hwIPPoolIPTotalNum.[{#SNMPINDEX}]</key>
+                            <history>1d</history>
+                            <trends>3650d</trends>
+                            <units>!ips</units>
+                            <applications>
+                                <application>
+                                    <name>IP-Pool</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IP-Pool {#IPPOOLNAME} Total IP Used</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-IPPOOL-MIB::hwIPPoolIPUsedNum.{#SNMPINDEX}</snmp_oid>
+                            <key>hwIPPoolIPUsedNum.[{#SNMPINDEX}]</key>
+                            <history>1d</history>
+                            <trends>3650d</trends>
+                            <units>!ips</units>
+                            <applications>
+                                <application>
+                                    <name>IP-Pool</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IP-Pool {#IPPOOLNAME} Percent Usage</name>
+                            <type>CALCULATED</type>
+                            <key>hwIPPoolIPUsedPercent.[{#SNMPINDEX}]</key>
+                            <history>1d</history>
+                            <trends>3650d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>%</units>
+                            <params>(100*last(&quot;hwIPPoolIPUsedNum.[{#SNMPINDEX}]&quot;,0))/last(&quot;hwIPPoolIPTotalNum.[{#SNMPINDEX}]&quot;, 0)</params>
+                            <applications>
+                                <application>
+                                    <name>IP-Pool</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return Math.round(value* 100) / 100</params>
+                                </step>
+                            </preprocessing>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{$IP_POOL_TRIGGER_USAGE}=1 and&#13;
+{avg(5m)}&gt;={$IP_POOL_USAGE_THRESHOLD}</expression>
+                                    <name>Uso de Endereços IPv4 em {#IPPOOLNAME} está acima de {$IP_POOL_USAGE_THRESHOLD}%</name>
+                                    <priority>HIGH</priority>
+                                    <dependencies>
+                                        <dependency>
+                                            <name>Endereços IPv4 ESGOTADOS em {#IPPOOLNAME}</name>
+                                            <expression>{$IP_POOL_TRIGGER_USAGE}=1 and&#13;
+{Template Huawei NE8000 M8-M14:hwIPPoolIPIdleNum.[{#SNMPINDEX}].avg(5m)}=0</expression>
+                                        </dependency>
+                                    </dependencies>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                    </item_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>IP-Pool {#IPPOOLNAME} Usage Statistics</name>
+                            <graph_items>
+                                <graph_item>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>199C0D</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwIPPoolIPTotalNum.[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>0040FF</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwIPPoolIPUsedNum.[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>FFFF00</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwIPPoolIPIdleNum.[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>3</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>000000</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwIPPoolIPUsedPercent.[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>4</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>F63100</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwIPPoolIPConflictNum.[{#SNMPINDEX}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                </discovery_rule>
+                <discovery_rule>
+                    <name>IPU Discovery</name>
+                    <type>SNMPV2</type>
+                    <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                    <snmp_oid>discovery[{#IPUSLOTNUM},HUAWEI-DEVICE-MIB::hwSlotIndex]</snmp_oid>
+                    <key>hwSlotIndex</key>
+                    <delay>1h</delay>
+                    <description>Descoberta de Slots IPU</description>
+                    <item_prototypes>
+                        <item_prototype>
+                            <name>IPU SLOT {#IPUSLOTNUM} CPU Usage (1 min)</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-DEVICE-MIB::hwAvgDuty1min.1.{#IPUSLOTNUM}.0</snmp_oid>
+                            <key>hwAvgDuty1min.1.[{#IPUSLOTNUM}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <units>%</units>
+                            <applications>
+                                <application>
+                                    <name>Chassis</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>Huawei NE8000 M8-M14 IPU Operation Status</name>
+                            </valuemap>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IPU SLOT {#IPUSLOTNUM} CPU Usage (5 min)</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-DEVICE-MIB::hwAvgDuty5min.1.{#IPUSLOTNUM}.0</snmp_oid>
+                            <key>hwAvgDuty5min.1.[{#IPUSLOTNUM}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <units>%</units>
+                            <applications>
+                                <application>
+                                    <name>Chassis</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>Huawei NE8000 M8-M14 IPU Operation Status</name>
+                            </valuemap>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{avg(5m)}&gt;80</expression>
+                                    <name>IPU SLOT {#IPUSLOTNUM} uso de CPU acima de 80%</name>
+                                    <priority>AVERAGE</priority>
+                                    <dependencies>
+                                        <dependency>
+                                            <name>IPU SLOT {#IPUSLOTNUM} uso de CPU acima de 90%</name>
+                                            <expression>{Template Huawei NE8000 M8-M14:hwAvgDuty5min.1.[{#IPUSLOTNUM}].avg(5m)}&gt;90</expression>
+                                        </dependency>
+                                    </dependencies>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{avg(5m)}&gt;90</expression>
+                                    <name>IPU SLOT {#IPUSLOTNUM} uso de CPU acima de 90%</name>
+                                    <priority>HIGH</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IPU SLOT {#IPUSLOTNUM} CPU Usage</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-DEVICE-MIB::hwCpuDevDuty.1.{#IPUSLOTNUM}.0</snmp_oid>
+                            <key>hwCpuDevDuty.1.[{#IPUSLOTNUM}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <units>%</units>
+                            <applications>
+                                <application>
+                                    <name>Chassis</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>Huawei NE8000 M8-M14 IPU Operation Status</name>
+                            </valuemap>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IPU SLOT {#IPUSLOTNUM} Free Memory</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-DEVICE-MIB::hwMemoryDevFree64.1.{#IPUSLOTNUM}.0</snmp_oid>
+                            <key>hwMemoryDevFree64.1.[{#IPUSLOTNUM}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <units>B</units>
+                            <applications>
+                                <application>
+                                    <name>Chassis</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>Huawei NE8000 M8-M14 IPU Operation Status</name>
+                            </valuemap>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IPU SLOT {#IPUSLOTNUM} Total Memory</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-DEVICE-MIB::hwMemoryDevSize64.1.{#IPUSLOTNUM}.0</snmp_oid>
+                            <key>hwMemoryDevSize64.1.[{#IPUSLOTNUM}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <units>B</units>
+                            <applications>
+                                <application>
+                                    <name>Chassis</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>Huawei NE8000 M8-M14 IPU Operation Status</name>
+                            </valuemap>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IPU SLOT {#IPUSLOTNUM} Percent Memory Used</name>
+                            <type>CALCULATED</type>
+                            <key>hwMemoryPercentUsed.1.[{#IPUSLOTNUM}]</key>
+                            <history>7d</history>
+                            <trends>3950d</trends>
+                            <value_type>FLOAT</value_type>
+                            <units>%</units>
+                            <params>(100*(last(&quot;hwMemoryDevSize64.1.[{#IPUSLOTNUM}]&quot;,0)-last(&quot;hwMemoryDevFree64.1.[{#IPUSLOTNUM}]&quot;, 0)))/last(&quot;hwMemoryDevSize64.1.[{#IPUSLOTNUM}]&quot;, 0)</params>
+                            <applications>
+                                <application>
+                                    <name>Chassis</name>
+                                </application>
+                            </applications>
+                            <preprocessing>
+                                <step>
+                                    <type>JAVASCRIPT</type>
+                                    <params>return Math.round(value* 100) / 100</params>
+                                </step>
+                            </preprocessing>
+                            <trigger_prototypes>
+                                <trigger_prototype>
+                                    <expression>{avg(5m)}&gt;80</expression>
+                                    <name>IPU SLOT {#IPUSLOTNUM} uso de Memória acima de 80%</name>
+                                    <priority>AVERAGE</priority>
+                                    <dependencies>
+                                        <dependency>
+                                            <name>IPU SLOT {#IPUSLOTNUM} uso de Memória acima de 90%</name>
+                                            <expression>{Template Huawei NE8000 M8-M14:hwMemoryPercentUsed.1.[{#IPUSLOTNUM}].avg(5m)}&gt;90</expression>
+                                        </dependency>
+                                    </dependencies>
+                                </trigger_prototype>
+                                <trigger_prototype>
+                                    <expression>{avg(5m)}&gt;90</expression>
+                                    <name>IPU SLOT {#IPUSLOTNUM} uso de Memória acima de 90%</name>
+                                    <priority>HIGH</priority>
+                                </trigger_prototype>
+                            </trigger_prototypes>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IPU SLOT {#IPUSLOTNUM} Administrative Status</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-DEVICE-MIB::hwSlotAdminStatus.1.{#IPUSLOTNUM}</snmp_oid>
+                            <key>hwSlotAdminStatus.1.[{#IPUSLOTNUM}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <value_type>FLOAT</value_type>
+                            <applications>
+                                <application>
+                                    <name>Chassis</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>Huawei NE8000 M8-M14 IPU Admin Status</name>
+                            </valuemap>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IPU SLOT {#IPUSLOTNUM} Description</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-DEVICE-MIB::hwSlotDesc.1.{#IPUSLOTNUM}</snmp_oid>
+                            <key>hwSlotDesc.1.[{#IPUSLOTNUM}]</key>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <value_type>TEXT</value_type>
+                            <applications>
+                                <application>
+                                    <name>Chassis</name>
+                                </application>
+                            </applications>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>IPU SLOT {#IPUSLOTNUM} Operational Status</name>
+                            <type>SNMPV2</type>
+                            <snmp_community>{$SNMP_COMMUNITY}</snmp_community>
+                            <snmp_oid>HUAWEI-DEVICE-MIB::hwSlotOperStatus.1.{#IPUSLOTNUM}</snmp_oid>
+                            <key>hwSlotOperStatus.1.[{#IPUSLOTNUM}]</key>
+                            <history>7d</history>
+                            <trends>3650d</trends>
+                            <applications>
+                                <application>
+                                    <name>Chassis</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>Huawei NE8000 M8-M14 IPU Operation Status</name>
+                            </valuemap>
+                        </item_prototype>
+                    </item_prototypes>
+                    <graph_prototypes>
+                        <graph_prototype>
+                            <name>IPU SLOT {#IPUSLOTNUM} CPU Usage</name>
+                            <graph_items>
+                                <graph_item>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>199C0D</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwCpuDevDuty.1.[{#IPUSLOTNUM}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>1</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>F63100</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwAvgDuty1min.1.[{#IPUSLOTNUM}]</key>
+                                    </item>
+                                </graph_item>
+                                <graph_item>
+                                    <sortorder>2</sortorder>
+                                    <drawtype>BOLD_LINE</drawtype>
+                                    <color>2774A4</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwAvgDuty5min.1.[{#IPUSLOTNUM}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                        <graph_prototype>
+                            <name>IPU SLOT {#IPUSLOTNUM} Memory Usage</name>
+                            <graph_items>
+                                <graph_item>
+                                    <drawtype>GRADIENT_LINE</drawtype>
+                                    <color>F7941D</color>
+                                    <item>
+                                        <host>Template Huawei NE8000 M8-M14</host>
+                                        <key>hwMemoryPercentUsed.1.[{#IPUSLOTNUM}]</key>
+                                    </item>
+                                </graph_item>
+                            </graph_items>
+                        </graph_prototype>
+                    </graph_prototypes>
+                </discovery_rule>
+            </discovery_rules>
+            <macros>
+                <macro>
+                    <macro>{$IP_POOL_GROUP_TRIGGER_USAGE}</macro>
+                    <value>1</value>
+                    <description>Fire triggers when ip-pool-group usage percent &gt;= {$IP_POOL_USAGE_THRESHOLD}</description>
+                </macro>
+                <macro>
+                    <macro>{$IP_POOL_TRIGGER_USAGE}</macro>
+                    <value>0</value>
+                    <description>Fire triggers when ip-pool usage percent &gt;= {$IP_POOL_USAGE_THRESHOLD}</description>
+                </macro>
+                <macro>
+                    <macro>{$IP_POOL_USAGE_THRESHOLD}</macro>
+                    <value>90</value>
+                    <description>Percent threshold of Pool Usage</description>
+                </macro>
+            </macros>
+            <screens>
+                <screen>
+                    <name>{HOST.NAME} Dashborad</name>
+                    <hsize>4</hsize>
+                    <vsize>7</vsize>
+                    <screen_items>
+                        <screen_item>
+                            <resourcetype>3</resourcetype>
+                            <style>1</style>
+                            <resource>
+                                <key>sysName</key>
+                                <host>Template Huawei NE8000 M8-M14</host>
+                            </resource>
+                            <width>500</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>0</y>
+                            <colspan>2</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>1</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>3</resourcetype>
+                            <style>1</style>
+                            <resource>
+                                <key>sysLocation</key>
+                                <host>Template Huawei NE8000 M8-M14</host>
+                            </resource>
+                            <width>500</width>
+                            <height>100</height>
+                            <x>2</x>
+                            <y>0</y>
+                            <colspan>2</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>1</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>1</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <key>sysUpTime</key>
+                                <host>Template Huawei NE8000 M8-M14</host>
+                            </resource>
+                            <width>350</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>1</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>1</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <key>hwTotalPPPoeOnlineNum</key>
+                                <host>Template Huawei NE8000 M8-M14</host>
+                            </resource>
+                            <width>350</width>
+                            <height>100</height>
+                            <x>1</x>
+                            <y>1</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>1</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <key>hwTotalDualStackOnlineNum</key>
+                                <host>Template Huawei NE8000 M8-M14</host>
+                            </resource>
+                            <width>350</width>
+                            <height>100</height>
+                            <x>2</x>
+                            <y>1</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>1</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <key>hwTotalIPv6OnlineNum</key>
+                                <host>Template Huawei NE8000 M8-M14</host>
+                            </resource>
+                            <width>350</width>
+                            <height>100</height>
+                            <x>3</x>
+                            <y>1</y>
+                            <colspan>1</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>IPU SLOT {#IPUSLOTNUM} CPU Usage</name>
+                                <host>Template Huawei NE8000 M8-M14</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>2</y>
+                            <colspan>2</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>IPU SLOT {#IPUSLOTNUM} Memory Usage</name>
+                                <host>Template Huawei NE8000 M8-M14</host>
+                            </resource>
+                            <width>750</width>
+                            <height>100</height>
+                            <x>2</x>
+                            <y>2</y>
+                            <colspan>2</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>3</max_columns>
+                        </screen_item>
+                        <screen_item>
+                            <resourcetype>20</resourcetype>
+                            <style>0</style>
+                            <resource>
+                                <name>IP-Pool-Group {#IPPOOLGROUPNAME} Usage Statistics</name>
+                                <host>Template Huawei NE8000 M8-M14</host>
+                            </resource>
+                            <width>350</width>
+                            <height>100</height>
+                            <x>0</x>
+                            <y>3</y>
+                            <colspan>4</colspan>
+                            <rowspan>1</rowspan>
+                            <elements>0</elements>
+                            <valign>0</valign>
+                            <halign>0</halign>
+                            <dynamic>0</dynamic>
+                            <sort_triggers>0</sort_triggers>
+                            <url/>
+                            <application/>
+                            <max_columns>4</max_columns>
+                        </screen_item>
+                    </screen_items>
+                </screen>
+            </screens>
+        </template>
+    </templates>
+    <graphs>
+        <graph>
+            <name>PPPoE Access-User Summary</name>
+            <ymin_type_1>FIXED</ymin_type_1>
+            <ymax_type_1>ITEM</ymax_type_1>
+            <ymax_item_1>
+                <host>Template Huawei NE8000 M8-M14</host>
+                <key>hwTotalPPPoeOnlineNum</key>
+            </ymax_item_1>
+            <graph_items>
+                <graph_item>
+                    <drawtype>GRADIENT_LINE</drawtype>
+                    <color>199C0D</color>
+                    <item>
+                        <host>Template Huawei NE8000 M8-M14</host>
+                        <key>hwTotalPPPoeOnlineNum</key>
+                    </item>
+                </graph_item>
+            </graph_items>
+        </graph>
+    </graphs>
+    <value_maps>
+        <value_map>
+            <name>Huawei NE8000 M8-M14 IPU Admin Status</name>
+            <mappings>
+                <mapping>
+                    <value>-1</value>
+                    <newvalue>nooperation</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>disable</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>enable</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>reset</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>test</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>confirm</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>switch</newvalue>
+                </mapping>
+                <mapping>
+                    <value>7</value>
+                    <newvalue>delete</newvalue>
+                </mapping>
+                <mapping>
+                    <value>8</value>
+                    <newvalue>forbidden</newvalue>
+                </mapping>
+                <mapping>
+                    <value>9</value>
+                    <newvalue>unforbidden</newvalue>
+                </mapping>
+                <mapping>
+                    <value>10</value>
+                    <newvalue>endservice</newvalue>
+                </mapping>
+                <mapping>
+                    <value>11</value>
+                    <newvalue>startservice</newvalue>
+                </mapping>
+                <mapping>
+                    <value>12</value>
+                    <newvalue>poweron</newvalue>
+                </mapping>
+                <mapping>
+                    <value>13</value>
+                    <newvalue>poweroff</newvalue>
+                </mapping>
+                <mapping>
+                    <value>14</value>
+                    <newvalue>is</newvalue>
+                </mapping>
+                <mapping>
+                    <value>15</value>
+                    <newvalue>oos</newvalue>
+                </mapping>
+                <mapping>
+                    <value>16</value>
+                    <newvalue>hotreset</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>Huawei NE8000 M8-M14 IPU Operation Status</name>
+            <mappings>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>null</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>normal</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>fault</newvalue>
+                </mapping>
+                <mapping>
+                    <value>4</value>
+                    <newvalue>forbidden</newvalue>
+                </mapping>
+                <mapping>
+                    <value>5</value>
+                    <newvalue>autofind</newvalue>
+                </mapping>
+                <mapping>
+                    <value>6</value>
+                    <newvalue>config</newvalue>
+                </mapping>
+                <mapping>
+                    <value>7</value>
+                    <newvalue>offline</newvalue>
+                </mapping>
+                <mapping>
+                    <value>8</value>
+                    <newvalue>abnormal</newvalue>
+                </mapping>
+                <mapping>
+                    <value>9</value>
+                    <newvalue>versionerr</newvalue>
+                </mapping>
+                <mapping>
+                    <value>10</value>
+                    <newvalue>autoload</newvalue>
+                </mapping>
+                <mapping>
+                    <value>11</value>
+                    <newvalue>outofservice</newvalue>
+                </mapping>
+                <mapping>
+                    <value>12</value>
+                    <newvalue>graceful</newvalue>
+                </mapping>
+                <mapping>
+                    <value>13</value>
+                    <newvalue>shutdown</newvalue>
+                </mapping>
+                <mapping>
+                    <value>14</value>
+                    <newvalue>energysavingshutdown</newvalue>
+                </mapping>
+                <mapping>
+                    <value>15</value>
+                    <newvalue>hightempshutdown</newvalue>
+                </mapping>
+                <mapping>
+                    <value>16</value>
+                    <newvalue>manualshutdown</newvalue>
+                </mapping>
+                <mapping>
+                    <value>17</value>
+                    <newvalue>mismatch</newvalue>
+                </mapping>
+                <mapping>
+                    <value>18</value>
+                    <newvalue>acoffshutdown</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+    </value_maps>
+</zabbix_export>
